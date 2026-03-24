@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Onboarding — Coffee Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: "Inter", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(28px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .app {
+      width: 100%;
+      max-width: 375px;
+      min-height: 100%;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .screen {
+      min-height: 100vh;
+      min-height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      background-color: #0d0705;
+    }
+
+    .screen__bg {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        to bottom,
+        #2C1810 0%,
+        #1a0f0a 40%,
+        #0d0705 100%
+      );
+    }
+
+    .screen__overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(12, 10, 18, 0.45);
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 1;
+      padding: 32px 24px 48px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .hero-icon {
+      width: 132px;
+      height: auto;
+      align-self: center;
+      margin-bottom: 28px;
+      color: #fff;
+      opacity: 0;
+      animation: fadeInUp 0.65s ease 0s forwards;
+    }
+
+    .hero-icon svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+
+    .title {
+      color: #fff;
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+      margin-bottom: 16px;
+      opacity: 0;
+      animation: fadeInUp 0.65s ease 0.2s forwards;
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.65);
+      font-size: 15px;
+      font-weight: 400;
+      line-height: 1.55;
+      margin-bottom: 40px;
+      opacity: 0;
+      animation: fadeInUp 0.65s ease 0.5s forwards;
+    }
+
+    .btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+      height: 56px;
+      border: none;
+      border-radius: 30px;
+      background: #C07850;
+      color: #fff;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      opacity: 0;
+      animation: fadeInUp 0.65s ease 0.8s forwards;
+      transition:
+        background 0.25s ease,
+        transform 0.25s ease,
+        box-shadow 0.25s ease;
+    }
+
+    .btn:hover {
+      background: #a86845;
+      transform: scale(1.02);
+      box-shadow: 0 10px 28px rgba(192, 120, 80, 0.42);
+    }
+
+    .btn:active {
+      transform: scale(0.98);
+      box-shadow: 0 4px 14px rgba(192, 120, 80, 0.3);
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <div class="screen">
+      <div class="screen__bg" aria-hidden="true"></div>
+      <div class="screen__overlay" aria-hidden="true"></div>
+      <div class="content">
+        <div class="hero-icon" aria-hidden="true">
+          <svg viewBox="0 0 120 140" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M38 12c2-6 6-10 10-6s2 10-2 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.55" />
+            <path d="M54 6c3-7 8-8 12-2s-1 12-6 16" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.5" />
+            <path d="M72 14c2-5 7-9 11-4s0 10-4 14" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" opacity="0.45" />
+            <path
+              d="M28 48h56v36c0 14-10 24-28 24S28 98 28 84V48z"
+              fill="currentColor"
+              fill-opacity="0.12"
+              stroke="currentColor"
+              stroke-width="2.8"
+              stroke-linejoin="round"
+            />
+            <path
+              d="M84 56h8c12 0 20 8 20 20s-8 22-20 22h-8"
+              stroke="currentColor"
+              stroke-width="2.8"
+              stroke-linecap="round"
+            />
+            <path
+              d="M18 118h84"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              opacity="0.85"
+            />
+            <ellipse cx="60" cy="118" rx="44" ry="9" fill="currentColor" fill-opacity="0.1" stroke="currentColor" stroke-width="2.2" />
+          </svg>
+        </div>
+        <h1 class="title">Fall in Love with Coffee in Blissful Delight!</h1>
+        <p class="subtitle">Welcome to our cozy coffee corner, where every cup is delightful for you.</p>
+        <a class="btn" href="home.html">Get Started</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>
