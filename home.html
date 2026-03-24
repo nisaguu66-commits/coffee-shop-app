@@ -259,6 +259,7 @@
       overflow: hidden;
       box-shadow: 0 4px 20px rgba(28, 28, 46, 0.08);
       animation: fadeInUp 0.55s ease both;
+      cursor: pointer;
     }
 
     .card:nth-child(1) {
@@ -556,6 +557,13 @@
         });
         tab.classList.add("tab--active");
         tab.setAttribute("aria-selected", "true");
+      });
+    });
+
+    document.querySelectorAll(".grid .card").forEach(function (card) {
+      card.addEventListener("click", function (e) {
+        if (e.target.closest(".card__add")) return;
+        window.location.href = "detail.html";
       });
     });
   </script>

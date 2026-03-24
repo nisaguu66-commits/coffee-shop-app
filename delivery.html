@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Delivery — Coffee Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      height: 100%;
+      font-family: "Inter", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #1C1C2E;
+      color: #1C1C2E;
+    }
+
+    .shell {
+      width: 100%;
+      max-width: 375px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      margin: 0 auto;
+      position: relative;
+      background: #1C1C2E;
+      overflow: hidden;
+    }
+
+    .map-wrap {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 48%;
+      min-height: 280px;
+      z-index: 0;
+    }
+
+    .map-wrap iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+      display: block;
+    }
+
+    .map-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      padding: 12px 16px;
+      z-index: 2;
+      pointer-events: none;
+    }
+
+    .map-overlay > * {
+      pointer-events: auto;
+    }
+
+    .icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: #fff;
+      cursor: pointer;
+      color: #1C1C2E;
+      border-radius: 12px;
+      text-decoration: none;
+      box-shadow: 0 2px 12px rgba(0, 0, 0, 0.12);
+    }
+
+    .panel {
+      position: absolute;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      z-index: 3;
+      background: #fff;
+      border-radius: 24px 24px 0 0;
+      padding: 24px 20px 28px;
+      padding-bottom: max(28px, env(safe-area-inset-bottom));
+      box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.12);
+      max-height: 58%;
+      overflow-y: auto;
+    }
+
+    .panel__time {
+      font-size: 15px;
+      font-weight: 600;
+      color: #C07850;
+      margin-bottom: 6px;
+    }
+
+    .panel__addr {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1C1C2E;
+      margin-bottom: 16px;
+    }
+
+    .progress {
+      height: 6px;
+      border-radius: 3px;
+      background: #eee;
+      margin-bottom: 22px;
+      overflow: hidden;
+    }
+
+    .progress__fill {
+      height: 100%;
+      width: 72%;
+      border-radius: 3px;
+      background: linear-gradient(90deg, #C07850, #d4926a);
+    }
+
+    .timeline-item {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 22px;
+    }
+
+    .timeline-item__dot {
+      width: 12px;
+      height: 12px;
+      margin-top: 4px;
+      border-radius: 50%;
+      background: #C07850;
+      flex-shrink: 0;
+      box-shadow: 0 0 0 4px rgba(192, 120, 80, 0.25);
+    }
+
+    .timeline-item__title {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1C1C2E;
+      margin-bottom: 4px;
+    }
+
+    .timeline-item__desc {
+      font-size: 13px;
+      line-height: 1.45;
+      color: #8e8e9a;
+    }
+
+    .courier {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding-top: 8px;
+      border-top: 1px solid #eee;
+    }
+
+    .courier__avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 14px;
+      object-fit: cover;
+      background: #eee;
+    }
+
+    .courier__info {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .courier__name {
+      font-size: 15px;
+      font-weight: 700;
+      color: #1C1C2E;
+    }
+
+    .courier__role {
+      font-size: 12px;
+      color: #8e8e9a;
+      margin-top: 2px;
+    }
+
+    .courier__call {
+      width: 44px;
+      height: 44px;
+      border: none;
+      border-radius: 12px;
+      background: rgba(192, 120, 80, 0.12);
+      color: #C07850;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      flex-shrink: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <div class="map-wrap">
+      <iframe
+        title="Mapa de entrega"
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade"
+        src="https://www.openstreetmap.org/export/embed.html?bbox=106.08%2C3.58%2C106.12%2C3.62&amp;layer=mapnik"
+      ></iframe>
+    </div>
+
+    <div class="map-overlay">
+      <a class="icon-btn" href="order.html" aria-label="Volver">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </a>
+      <button type="button" class="icon-btn" aria-label="Ajustes">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.09a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2z" />
+          <circle cx="12" cy="12" r="3" />
+        </svg>
+      </button>
+    </div>
+
+    <div class="panel">
+      <p class="panel__time">10 minutes left</p>
+      <p class="panel__addr">Delivery to Jl. Kpg Sutoyo</p>
+      <div class="progress" role="progressbar" aria-valuenow="72" aria-valuemin="0" aria-valuemax="100">
+        <div class="progress__fill"></div>
+      </div>
+
+      <div class="timeline-item">
+        <div class="timeline-item__dot" aria-hidden="true"></div>
+        <div>
+          <p class="timeline-item__title">Delivered your order</p>
+          <p class="timeline-item__desc">
+            We will deliver your goods to you in the shortest possible time.
+          </p>
+        </div>
+      </div>
+
+      <div class="courier">
+        <img
+          class="courier__avatar"
+          src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=200"
+          alt=""
+        />
+        <div class="courier__info">
+          <p class="courier__name">Brooklyn Simmons</p>
+          <p class="courier__role">Personal Courier</p>
+        </div>
+        <button type="button" class="courier__call" aria-label="Llamar">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

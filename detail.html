@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+  <title>Detail — Coffee Shop</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      min-height: 100%;
+      font-family: "Inter", system-ui, sans-serif;
+      -webkit-font-smoothing: antialiased;
+      background: #F5F5F5;
+      color: #1C1C2E;
+    }
+
+    .app {
+      width: 100%;
+      max-width: 375px;
+      min-height: 100vh;
+      min-height: 100dvh;
+      margin: 0 auto;
+      padding-bottom: 100px;
+      background: #F5F5F5;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 16px;
+      background: #F5F5F5;
+    }
+
+    .topbar__title {
+      font-size: 17px;
+      font-weight: 700;
+      color: #1C1C2E;
+    }
+
+    .icon-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      color: #1C1C2E;
+      border-radius: 10px;
+      text-decoration: none;
+    }
+
+    .icon-btn:active {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .hero-img {
+      width: 100%;
+      aspect-ratio: 1;
+      object-fit: cover;
+      display: block;
+      background: #eee;
+    }
+
+    .detail-body {
+      padding: 20px 20px 24px;
+    }
+
+    .product-name {
+      font-size: 22px;
+      font-weight: 700;
+      color: #1C1C2E;
+      margin-bottom: 4px;
+    }
+
+    .product-sub {
+      font-size: 14px;
+      color: #8e8e9a;
+      margin-bottom: 18px;
+    }
+
+    .option-icons {
+      display: flex;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .option-icons__item {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: rgba(192, 120, 80, 0.12);
+      color: #C07850;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .rating-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 24px;
+      font-size: 15px;
+      font-weight: 600;
+      color: #1C1C2E;
+    }
+
+    .rating-row__count {
+      font-weight: 500;
+      color: #8e8e9a;
+      font-size: 14px;
+    }
+
+    .section-title {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: #1C1C2E;
+    }
+
+    .description {
+      font-size: 14px;
+      line-height: 1.55;
+      color: #6b6b78;
+      margin-bottom: 8px;
+    }
+
+    .read-more {
+      border: none;
+      background: none;
+      padding: 0;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: #C07850;
+      cursor: pointer;
+      margin-bottom: 28px;
+    }
+
+    .size-label {
+      font-size: 17px;
+      font-weight: 700;
+      margin-bottom: 12px;
+      color: #1C1C2E;
+    }
+
+    .size-row {
+      display: flex;
+      gap: 12px;
+    }
+
+    .size-btn {
+      flex: 1;
+      height: 44px;
+      border: none;
+      border-radius: 12px;
+      font-family: inherit;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      background: #fff;
+      color: #6b6b78;
+      box-shadow: 0 2px 10px rgba(28, 28, 46, 0.06);
+      transition: background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .size-btn--active {
+      background: #C07850;
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(192, 120, 80, 0.35);
+    }
+
+    .footer-bar {
+      position: fixed;
+      left: 50%;
+      bottom: 0;
+      transform: translateX(-50%);
+      width: 375px;
+      max-width: 100%;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 14px 20px;
+      padding-bottom: max(14px, env(safe-area-inset-bottom));
+      background: #fff;
+      box-shadow: 0 -4px 24px rgba(28, 28, 46, 0.08);
+      border-radius: 24px 24px 0 0;
+    }
+
+    .footer-bar__price {
+      font-size: 20px;
+      font-weight: 700;
+      color: #1C1C2E;
+      flex-shrink: 0;
+    }
+
+    .footer-bar__buy {
+      flex: 1;
+      height: 52px;
+      border: none;
+      border-radius: 14px;
+      background: #C07850;
+      color: #fff;
+      font-family: inherit;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 16px rgba(192, 120, 80, 0.35);
+    }
+
+    .footer-bar__buy:active {
+      transform: scale(0.98);
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header class="topbar">
+      <a class="icon-btn" href="home.html" aria-label="Volver">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M15 18l-6-6 6-6" />
+        </svg>
+      </a>
+      <h1 class="topbar__title">Detail</h1>
+      <button type="button" class="icon-btn" aria-label="Favorito">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M20.8 4.6a5.5 5.5 0 00-7.8 0L12 5.6l-1-1a5.5 5.5 0 00-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 000-7.8z" />
+        </svg>
+      </button>
+    </header>
+
+    <img
+      class="hero-img"
+      src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=800"
+      alt="Caffe Mocha"
+    />
+
+    <div class="detail-body">
+      <h2 class="product-name">Caffe Mocha</h2>
+      <p class="product-sub">Ice/Hot</p>
+
+      <div class="option-icons" aria-hidden="true">
+        <div class="option-icons__item" title="Iced">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8 10h8v8a4 4 0 01-8 0v-8zM10 10V8a2 2 0 114 0v2" />
+            <path d="M6 18h12" />
+          </svg>
+        </div>
+        <div class="option-icons__item" title="Hot">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M8 14h8v4a4 4 0 01-8 0v-4z" />
+            <path d="M10 14V6M14 14V6M12 4v2" stroke-linecap="round" />
+          </svg>
+        </div>
+        <div class="option-icons__item" title="Foam">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M6 16c0-4 3-7 6-7s6 3 6 7" />
+            <path d="M8 16h8" />
+          </svg>
+        </div>
+      </div>
+
+      <div class="rating-row">
+        <span aria-hidden="true">⭐</span>
+        <span>4.8</span>
+        <span class="rating-row__count">(230)</span>
+      </div>
+
+      <h3 class="section-title">Description</h3>
+      <p class="description">
+        A cappuccino is an approximately 150 ml (5 oz) beverage, with 25 ml of espresso coffee and 85ml of fresh milk the foaming action creates
+        additional volume.
+      </p>
+      <button type="button" class="read-more">Read More</button>
+
+      <p class="size-label">Size</p>
+      <div class="size-row" role="group" aria-label="Tamaño">
+        <button type="button" class="size-btn">S</button>
+        <button type="button" class="size-btn size-btn--active">M</button>
+        <button type="button" class="size-btn">L</button>
+      </div>
+    </div>
+
+    <div class="footer-bar">
+      <span class="footer-bar__price">$4.53</span>
+      <a class="footer-bar__buy" href="order.html">Buy Now</a>
+    </div>
+  </div>
+  <script>
+    document.querySelectorAll(".size-btn").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        document.querySelectorAll(".size-btn").forEach(function (b) {
+          b.classList.remove("size-btn--active");
+        });
+        btn.classList.add("size-btn--active");
+      });
+    });
+  </script>
+</body>
+</html>
